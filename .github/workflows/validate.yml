@@ -12,3 +12,7 @@ jobs:
 
             - name: Validate js files
               run: test -f script.js
+
+              
+            - name: Validate js code
+              run: node --check  script.js
