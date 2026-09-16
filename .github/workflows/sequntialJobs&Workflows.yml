@@ -1,5 +1,6 @@
 name: jobs workflow
 on: 
+  #sequential workflow
     workflow_run:
         workflows: ["first workflow"]
         types:
@@ -10,6 +11,7 @@ jobs:
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
+              
             - name: Validate html files
               run: test -f index.html
 
@@ -27,6 +29,7 @@ jobs:
               
 
     validate-code:
+      #sequential jobs
         needs: [validate-html-files, validate-js-files]
         runs-on: ubuntu-latest
         steps:
