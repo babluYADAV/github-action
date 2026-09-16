@@ -28,8 +28,12 @@ jobs:
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
+
             - name: Validate js code
               run: node --check  script.js
 
+            - name: Install HTML Tidy
+              run: sudo apt-get update && sudo apt-get install -y tidy
+              
             - name: Validate html code
               run: tidy -e index.html
