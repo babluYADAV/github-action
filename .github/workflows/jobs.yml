@@ -1,4 +1,4 @@
-name: sequential workflow
+name: jobs workflow
 on: push
 jobs:
     validate-html-files:
