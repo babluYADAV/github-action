@@ -6,6 +6,10 @@ jobs:
       steps:
         - name: Hello world action step
           run: echo "Hello world!"
+       
+        #if exit 1 then fails if exit 0 the is pass
+        # - name: fail this job intentionally
+        #   run: exit 1
           
     bye-job:
       runs-on: ubuntu-latest

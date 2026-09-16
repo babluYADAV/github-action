@@ -7,11 +7,13 @@ on:
             - completed
 jobs:
     validate-html-files:
+      # run this jobs only if first workflow is success
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
-              
+
             - name: Validate html files
               run: test -f index.html
 
@@ -19,6 +21,7 @@ jobs:
 
 
     validate-js-files:
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
@@ -30,6 +33,7 @@ jobs:
 
     validate-code:
       #sequential jobs
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         needs: [validate-html-files, validate-js-files]
         runs-on: ubuntu-latest
         steps:
