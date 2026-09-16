@@ -1,15 +1,27 @@
 name: third workflow
 on: push
 jobs:
-    hello-job:
+    validate-html-files:
         runs-on: ubuntu-latest
         steps:
-            - name: Hello world action step
-              run: echo "Hello world!"
+           - name: Validate html files
+             run: test -f index.html
 
 
-    bye-job:
+
+    validate-js-files:
         runs-on: ubuntu-latest
         steps:
-            - name: Bye world action step
-              run: echo "Goodbye world!"
+            - name: Validate js files
+              run: test -f script.js
+              
+
+    validate-code:
+        needs: [validate-html-files, validate-js-files]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Validate js code
+              run: node --check  script.js
+
+            - name: Validate html code
+              run: tidy -e index.html
